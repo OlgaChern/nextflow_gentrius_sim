@@ -1,0 +1,197 @@
+Sep-11 15:24:36.008 [main] DEBUG nextflow.cli.Launcher - $> nextflow ./gentrius_analysis.nf
+Sep-11 15:24:36.153 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 21.04.3
+Sep-11 15:24:36.180 [main] INFO  nextflow.cli.CmdRun - Launching `./gentrius_analysis.nf` [high_lamarr] - revision: c2e8238ea1
+Sep-11 15:24:36.254 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; plugins-dir=/Users/Olga/.nextflow/plugins
+Sep-11 15:24:36.257 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Sep-11 15:24:36.259 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins local root: .nextflow/plr/empty
+Sep-11 15:24:36.266 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Sep-11 15:24:36.267 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Sep-11 15:24:36.270 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Sep-11 15:24:36.280 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Sep-11 15:24:36.333 [main] DEBUG nextflow.Session - Session uuid: 3440ae80-6df5-4455-853b-7c41dd193792
+Sep-11 15:24:36.333 [main] DEBUG nextflow.Session - Run name: high_lamarr
+Sep-11 15:24:36.334 [main] DEBUG nextflow.Session - Executor pool size: 4
+Sep-11 15:24:36.353 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 21.04.3 build 5560
+  Created: 21-07-2021 15:09 UTC (17:09 CEST)
+  System: Mac OS X 10.15.7
+  Runtime: Groovy 3.0.7 on Java HotSpot(TM) 64-Bit Server VM 1.8.0_40-b27
+  Encoding: UTF-8 (UTF-8)
+  Process: 94647@Admins-MacBook-Pro-9.local [192.168.0.73]
+  CPUs: 4 - Mem: 16 GB (473.7 MB) - Swap: 15 GB (1.1 GB)
+Sep-11 15:24:36.368 [main] DEBUG nextflow.Session - Work-dir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work [Mac OS X]
+Sep-11 15:24:36.368 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/bin
+Sep-11 15:24:36.384 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Sep-11 15:24:36.395 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-11 15:24:36.525 [main] DEBUG nextflow.Session - Session start invoked
+Sep-11 15:24:37.796 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Sep-11 15:24:37.805 [main] DEBUG nextflow.Session - Workflow process names [dsl1]: random_tree, sanity_check_results, topological_summary, random_matrix, summary_default, sanity_check_3, sanity_check_2, gentrius_default_1MLN_10_MLN, gentrius_print_trees, sanity_check_1
+Sep-11 15:24:37.806 [main] INFO  nextflow.script.BaseScript - Prototype pipeline for analysis with Gentrius
+Sep-11 15:24:37.919 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:37.919 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:37.925 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-11 15:24:37.930 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=16 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-11 15:24:38.028 [main] DEBUG nextflow.processor.TaskProcessor - Creating *combiner* operator for each param(s) at index(es): [0, 1, 2]
+Sep-11 15:24:38.093 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:38.093 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:38.112 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:38.113 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:38.153 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:38.153 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:38.165 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:38.165 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:38.197 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:38.198 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:38.203 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:38.203 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:38.213 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:38.214 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:38.229 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:38.229 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:38.235 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-11 15:24:38.235 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-11 15:24:38.237 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:38.238 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Sep-11 15:24:38.238 [main] DEBUG nextflow.Session - Session await
+Sep-11 15:24:38.242 [Task submitter] INFO  nextflow.Session - [38/1f24ba] Submitted process > random_matrix (4)
+Sep-11 15:24:38.249 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:38.250 [Task submitter] INFO  nextflow.Session - [86/db3a1f] Submitted process > random_matrix (1)
+Sep-11 15:24:38.258 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:38.259 [Task submitter] INFO  nextflow.Session - [97/05a57a] Submitted process > random_matrix (2)
+Sep-11 15:24:38.266 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:38.268 [Task submitter] INFO  nextflow.Session - [9d/92983d] Submitted process > random_matrix (3)
+Sep-11 15:24:38.772 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: random_matrix (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/86/db3a1ff33f62e265c98c52e8e62874]
+Sep-11 15:24:38.817 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: random_matrix (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/97/05a57a89069cef40a3aef73d2d8334]
+Sep-11 15:24:38.824 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: random_matrix (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/9d/92983d586c7cdf18d48efb4d677484]
+Sep-11 15:24:38.851 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:38.851 [Task submitter] INFO  nextflow.Session - [bd/3ba064] Submitted process > random_tree (2)
+Sep-11 15:24:38.858 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:38.858 [Task submitter] INFO  nextflow.Session - [ac/caf54e] Submitted process > random_tree (4)
+Sep-11 15:24:38.865 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:38.866 [Task submitter] INFO  nextflow.Session - [f6/2dc112] Submitted process > random_tree (3)
+Sep-11 15:24:38.878 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: random_matrix (4); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/38/1f24bab98e6da5ae110ed4c10a351f]
+Sep-11 15:24:38.884 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:38.886 [Task submitter] INFO  nextflow.Session - [94/a76b6f] Submitted process > random_tree (1)
+Sep-11 15:24:39.041 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: random_tree (4); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/ac/caf54e3f07073e684c92478c81d905]
+Sep-11 15:24:39.046 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.047 [Task submitter] INFO  nextflow.Session - [8f/ef049a] Submitted process > random_tree (5)
+Sep-11 15:24:39.053 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: random_tree (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/f6/2dc1128db440c515f29501a18931dd]
+Sep-11 15:24:39.058 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.059 [Task submitter] INFO  nextflow.Session - [0f/515118] Submitted process > random_tree (6)
+Sep-11 15:24:39.060 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: random_tree (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/94/a76b6fb41273093e120fd27497f8fb]
+Sep-11 15:24:39.064 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.065 [Task submitter] INFO  nextflow.Session - [30/4ce5f7] Submitted process > random_tree (7)
+Sep-11 15:24:39.145 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: random_tree (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/bd/3ba064e341206a79e8c46d30c7998d]
+Sep-11 15:24:39.157 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.159 [Task submitter] INFO  nextflow.Session - [cf/dd4543] Submitted process > random_tree (8)
+Sep-11 15:24:39.244 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: random_tree (5); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/8f/ef049a9439a0e356f82afc77ab3b0f]
+Sep-11 15:24:39.250 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.253 [Task submitter] INFO  nextflow.Session - [59/1610a4] Submitted process > gentrius_default_1MLN_10_MLN (1)
+Sep-11 15:24:39.267 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: random_tree (6); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/0f/515118c2cc5a0af0f67dfe185d2128]
+Sep-11 15:24:39.357 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.358 [Task submitter] INFO  nextflow.Session - [5d/64743f] Submitted process > gentrius_default_1MLN_10_MLN (2)
+Sep-11 15:24:39.360 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 11; name: random_tree (7); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/30/4ce5f7aa3c094666763d4d18ae4822]
+Sep-11 15:24:39.386 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.387 [Task submitter] INFO  nextflow.Session - [8f/c04a81] Submitted process > gentrius_default_1MLN_10_MLN (3)
+Sep-11 15:24:39.405 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 12; name: random_tree (8); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/cf/dd4543349996c52a860410b1d4d588]
+Sep-11 15:24:39.412 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.413 [Task submitter] INFO  nextflow.Session - [3e/249ea5] Submitted process > gentrius_default_1MLN_10_MLN (4)
+Sep-11 15:24:39.617 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 15; name: gentrius_default_1MLN_10_MLN (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/8f/c04a816ff2e10bcbc75e848b4189c6]
+Sep-11 15:24:39.629 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.630 [Task submitter] INFO  nextflow.Session - [1e/0c4358] Submitted process > gentrius_default_1MLN_10_MLN (5)
+Sep-11 15:24:39.631 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 16; name: gentrius_default_1MLN_10_MLN (4); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/3e/249ea560f5fe0992aa3db73245c145]
+Sep-11 15:24:39.643 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.643 [Task submitter] INFO  nextflow.Session - [55/d679b3] Submitted process > gentrius_default_1MLN_10_MLN (7)
+Sep-11 15:24:39.727 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 13; name: gentrius_default_1MLN_10_MLN (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/59/1610a4a20b3ca6feb5a1ed1770d66d]
+Sep-11 15:24:39.749 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 14; name: gentrius_default_1MLN_10_MLN (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/5d/64743faff2cf7c5f6429c5e447a8fa]
+Sep-11 15:24:39.753 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.754 [Task submitter] INFO  nextflow.Session - [e4/fc8460] Submitted process > gentrius_default_1MLN_10_MLN (6)
+Sep-11 15:24:39.761 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.761 [Task submitter] INFO  nextflow.Session - [53/a182f8] Submitted process > gentrius_default_1MLN_10_MLN (8)
+Sep-11 15:24:39.816 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 19; name: gentrius_default_1MLN_10_MLN (7); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/55/d679b3edeca0837bce6d137f8565d3]
+Sep-11 15:24:39.828 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.829 [Task submitter] INFO  nextflow.Session - [76/b355bb] Submitted process > gentrius_print_trees (2)
+Sep-11 15:24:39.920 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 17; name: gentrius_default_1MLN_10_MLN (5); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/1e/0c43584e5c35463427a869f0194a22]
+Sep-11 15:24:39.924 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.934 [Task submitter] INFO  nextflow.Session - [8e/ed4686] Submitted process > gentrius_print_trees (1)
+Sep-11 15:24:39.971 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 18; name: gentrius_default_1MLN_10_MLN (6); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/e4/fc8460f590fe5129d8b318dd08ec17]
+Sep-11 15:24:39.977 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 20; name: gentrius_default_1MLN_10_MLN (8); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/53/a182f869afd7ef4dc091f135e14aac]
+Sep-11 15:24:39.980 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:39.984 [Task submitter] INFO  nextflow.Session - [15/19e0e9] Submitted process > gentrius_print_trees (3)
+Sep-11 15:24:39.994 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 22; name: gentrius_print_trees (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/76/b355bbaf041d84909be39eb38d969e]
+Sep-11 15:24:40.005 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.006 [Task submitter] INFO  nextflow.Session - [61/8d369c] Submitted process > gentrius_print_trees (4)
+Sep-11 15:24:40.034 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.034 [Task submitter] INFO  nextflow.Session - [6c/34a6b9] Submitted process > gentrius_print_trees (5)
+Sep-11 15:24:40.068 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 21; name: gentrius_print_trees (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/8e/ed4686400cbd3575ca4fd87f50db2a]
+Sep-11 15:24:40.081 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.085 [Task submitter] INFO  nextflow.Session - [5c/c4c102] Submitted process > gentrius_print_trees (6)
+Sep-11 15:24:40.134 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 23; name: gentrius_print_trees (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/15/19e0e9b47852c5dbd48b7b50dabe95]
+Sep-11 15:24:40.139 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.139 [Task submitter] INFO  nextflow.Session - [33/b192eb] Submitted process > gentrius_print_trees (7)
+Sep-11 15:24:40.166 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 24; name: gentrius_print_trees (4); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/61/8d369c351057d9bc7d06f7fe85b281]
+Sep-11 15:24:40.177 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.178 [Task submitter] INFO  nextflow.Session - [38/61a87f] Submitted process > gentrius_print_trees (8)
+Sep-11 15:24:40.189 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 25; name: gentrius_print_trees (5); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/6c/34a6b92663d523b1bd55093d907e83]
+Sep-11 15:24:40.203 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.203 [Task submitter] INFO  nextflow.Session - [a4/350ba7] Submitted process > sanity_check_1 (1)
+Sep-11 15:24:40.278 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 26; name: gentrius_print_trees (6); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/5c/c4c1027efc2b3f3da46cf1b33ef453]
+Sep-11 15:24:40.286 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.287 [Task submitter] INFO  nextflow.Session - [8b/1f2503] Submitted process > sanity_check_2 (1)
+Sep-11 15:24:40.316 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 27; name: gentrius_print_trees (7); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/33/b192ebcb7218948769e144db985a1a]
+Sep-11 15:24:40.328 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.328 [Task submitter] INFO  nextflow.Session - [3c/9a7d62] Submitted process > sanity_check_3 (1)
+Sep-11 15:24:40.334 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 28; name: gentrius_print_trees (8); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/38/61a87f917f6b98ed2b02bb14d6f0e8]
+Sep-11 15:24:40.356 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.356 [Task submitter] INFO  nextflow.Session - [79/fdf921] Submitted process > summary_default
+Sep-11 15:24:40.438 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 29; name: sanity_check_1 (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/a4/350ba7ceaebce67003048b405ccea1]
+Sep-11 15:24:40.447 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.447 [Task submitter] INFO  nextflow.Session - [53/a0ad28] Submitted process > sanity_check_2 (2)
+Sep-11 15:24:40.493 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 31; name: sanity_check_3 (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/3c/9a7d62bda1e2126eb1c5ac65e45d4e]
+Sep-11 15:24:40.498 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.499 [Task submitter] INFO  nextflow.Session - [bf/866cdf] Submitted process > sanity_check_3 (2)
+Sep-11 15:24:40.667 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 34; name: sanity_check_3 (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/bf/866cdf757dec324a76570f11da86ef]
+Sep-11 15:24:40.671 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.672 [Task submitter] INFO  nextflow.Session - [cd/692a73] Submitted process > sanity_check_1 (2)
+Sep-11 15:24:40.823 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 35; name: sanity_check_1 (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/cd/692a7311e0695eb02c6220384e8060]
+Sep-11 15:24:40.826 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.827 [Task submitter] INFO  nextflow.Session - [83/fe406b] Submitted process > sanity_check_1 (3)
+Sep-11 15:24:40.976 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 36; name: sanity_check_1 (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/83/fe406b8aa271c7b0f41d49ad4fbe68]
+Sep-11 15:24:40.979 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:40.980 [Task submitter] INFO  nextflow.Session - [98/7516b3] Submitted process > sanity_check_3 (3)
+Sep-11 15:24:41.143 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 37; name: sanity_check_3 (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/98/7516b3bb723cc4dc5f71d9cdb51904]
+Sep-11 15:24:41.151 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:41.151 [Task submitter] INFO  nextflow.Session - [3f/5a543b] Submitted process > sanity_check_2 (3)
+Sep-11 15:24:41.242 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 30; name: sanity_check_2 (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/8b/1f25033fecc35277cda97e76db10c7]
+Sep-11 15:24:41.252 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:41.253 [Task submitter] INFO  nextflow.Session - [ad/a82fe3] Submitted process > sanity_check_3 (4)
+Sep-11 15:24:41.357 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 33; name: sanity_check_2 (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/53/a0ad28d0dd28e2ef04bf52d1ce4cc4]
+Sep-11 15:24:41.363 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:41.364 [Task submitter] INFO  nextflow.Session - [34/0b0f8f] Submitted process > sanity_check_2 (4)
+Sep-11 15:24:41.422 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 40; name: sanity_check_3 (4); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/ad/a82fe3e4568911aff83df690a56dba]
+Sep-11 15:24:41.427 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:41.428 [Task submitter] INFO  nextflow.Session - [36/a8f6dc] Submitted process > sanity_check_1 (4)
+Sep-11 15:24:41.572 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 41; name: sanity_check_1 (4); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/36/a8f6dc8cd5eccb547832638996f150]
+Sep-11 15:24:41.575 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:41.575 [Task submitter] INFO  nextflow.Session - [4a/0a51c1] Submitted process > topological_summary (1)
+Sep-11 15:24:41.623 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 32; name: summary_default; status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/79/fdf921f37fe7897a065df21b887251]
+Sep-11 15:24:41.626 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:41.626 [Task submitter] INFO  nextflow.Session - [50/02b5a4] Submitted process > topological_summary (2)
+Sep-11 15:24:42.008 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 38; name: sanity_check_2 (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/3f/5a543b86c5d0a07e89c925ac413246]
+Sep-11 15:24:42.011 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:42.011 [Task submitter] INFO  nextflow.Session - [9a/8ffb9f] Submitted process > topological_summary (3)
+Sep-11 15:24:42.208 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 39; name: sanity_check_2 (4); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/34/0b0f8f814b0ba21d36d539a8c14c15]
+Sep-11 15:24:42.212 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:42.212 [Task submitter] INFO  nextflow.Session - [bf/8b1c97] Submitted process > topological_summary (4)
+Sep-11 15:24:43.115 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 42; name: topological_summary (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/4a/0a51c1ca9016d10ce8d2b750f96982]
+Sep-11 15:24:43.123 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-11 15:24:43.123 [Task submitter] INFO  nextflow.Session - [66/45f775] Submitted process > sanity_check_results
+Sep-11 15:24:43.136 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 43; name: topological_summary (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/50/02b5a4757746c918e4c90f0fc65954]
+Sep-11 15:24:43.211 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 46; name: sanity_check_results; status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/66/45f7750286da3e68b72151594ac167]
+Sep-11 15:24:43.303 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 44; name: topological_summary (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/9a/8ffb9ffd40e646608d561ed1900e74]
+Sep-11 15:24:43.373 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 45; name: topological_summary (4); status: COMPLETED; exit: 0; error: -; workDir: /Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/work/bf/8b1c975d758f0c522054b8f2a12951]
+Sep-11 15:24:43.375 [main] DEBUG nextflow.Session - Session await > all process finished
+Sep-11 15:24:43.376 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-11 15:24:43.383 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=46; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=15.1s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=4; peakCpus=4; peakMemory=0; ]
+Sep-11 15:24:43.520 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-11 15:24:43.531 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

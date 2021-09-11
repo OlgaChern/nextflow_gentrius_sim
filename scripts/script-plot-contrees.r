@@ -39,18 +39,22 @@ pdf(file_out,5,5)
 	ext_ids=array(as.numeric(ext_ids))
 	int_ids=array(as.numeric(int_ids)) 
 
+	max_ext_degree=0
 	if(length(ext_ids)>0){
 		f_cols=colorRampPalette(c("#b4bfe0","royalblue"))
 		ext_degrees=degree(graph,v=ext_ids,mode="all")
 		ext_cols=f_cols(max(ext_degrees))
 		V(graph)[ext_ids]$color=ext_cols[ext_degrees]
+		max_ext_degree=max(ext_degrees)
 	}
 
+	max_int_degree=0
 	if(length(int_ids)>0){
         	f_cols=colorRampPalette(c("#bf8f8f","firebrick"))
                 int_degrees=degree(graph,v=int_ids,mode="all")
                 int_cols=f_cols(max(int_degrees))
                 V(graph)[int_ids]$color=int_cols[int_degrees]
+		max_int_degree=max(int_degrees)
 	}
 
         plot.igraph(graph,vertex.label=NA,xlim=c(-1.5,1.5),ylim=c(-1.5,1.5)) 
@@ -64,11 +68,11 @@ pdf(file_out,5,5)
 	x=-0.4
 	col_nd=ifelse(ext_NUM>0,"royalblue","lightgrey")
 	text(x,y,paste("No.mult.ext.nodes: ",ext_NUM,sep=""),cex=sz,adj=0,col=col_nd)
-	text(x,y-e,paste("max degree: ",ext_max_degree,sep=""),cex=sz,adj=0,col=col_nd)
+	text(x,y-e,paste("max degree: ",max_ext_degree,sep=""),cex=sz,adj=0,col=col_nd)
 	x=0.7
 	col_nd=ifelse(int_NUM>0,"firebrick","lightgrey")
 	text(x,y,paste("No.mult.int.nodes: ",int_NUM,sep=""),cex=sz,adj=0,col=col_nd)
-        text(x,y-e,paste("max degree: ",int_max_degree,sep=""),cex=sz,adj=0,col=col_nd)
+        text(x,y-e,paste("max degree: ",max_int_degree,sep=""),cex=sz,adj=0,col=col_nd)
 
 	#text_info=paste(r[i,1],"REMAINED",r[i,2]+n,"REMAINED_INT",r[i,2],"DISCARDED",r[i,3],"T_SIZE",9,"NUM_MULTI_NODES",multi_v,"EXTERNAL_MULTI",ext_NUM,"INTERNAL_MULTI",int_NUM,"MULTI_MAX",max(ext_max_degree,int_max_degree),"EXT_MAX",ext_max_degree,"EXT_AVE",ext_ave_degree,"INT_MAX",int_max_degree,"INT_AVE",int_ave_degree,"| EXT_DISTR",paste(ext_distr,collapse=" "),"INT_DISTR",paste(int_distr,collapse=" "),"|",sep=" ")
 

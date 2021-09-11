@@ -7,11 +7,10 @@ println "Prototype pipeline for analysis with Gentrius"
 results_path="$PWD/results"
 
 // Scripts and binaries ----------------------------------------------------------------------------------------
-f_scripts="/Users/Olga/Projects/Science/Projects/terraces/gentrius_pipe_nf/scripts"
-iqtree2_gentrius="/Users/Olga/Projects/Science/Projects/terraces/gentrius_pipe_nf/scripts/iqtree2_gentrius"
-script_m_py="/Users/Olga/Projects/Science/Projects/terraces/gentrius_pipe_nf/scripts/script-gen_0_1_matrix.py"
-script_sanity_check_2_r="/Users/Olga/Projects/Science/Projects/terraces/gentrius_pipe_nf/scripts/script-sanity_check_2-analyse_rf_all.r"
-script_topology_summary="/Users/Olga/Projects/Science/Projects/terraces/gentrius_pipe_nf/scripts/script-plot-contrees.r"
+iqtree2_gentrius="/Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/scripts/iqtree2_gentrius"
+script_m_py="/Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/scripts/script-gen_0_1_matrix.py"
+script_sanity_check_2_r="/Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/scripts/script-sanity_check_2-analyse_rf_all.r"
+script_topology_summary="/Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/scripts/script-plot-contrees.r"
 // -------------------------------------------------------------------------------------------------------------
 // Simulation parameters
 taxa=[20]

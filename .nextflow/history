@@ -1,0 +1,2 @@
+2021-09-11 15:23:39	8.9s	fabulous_plateau	ERR	c2e8238ea1c0997e8e15b337fc609a45	f851c609-9a44-4126-ac34-3f0eaa71bf45	nextflow ./gentrius_analysis.nf
+2021-09-11 15:24:36	7.5s	high_lamarr	OK	c2e8238ea1c0997e8e15b337fc609a45	3440ae80-6df5-4455-853b-7c41dd193792	nextflow ./gentrius_analysis.nf
