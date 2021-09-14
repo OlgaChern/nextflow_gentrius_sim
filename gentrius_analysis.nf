@@ -1,51 +1,116 @@
 #!/usr/bin/env nextflow
-
-//nextflow.enable.dsl=2
+// ------------------------------------------------------------------------------------------------
+params.flag_plot=false
+// ------------------------------------------------------------------------------------------------
 println "Prototype pipeline for analysis with Gentrius"
-
-
+// ------------------------------------------------------------------------------------------------
 results_path="$PWD/results"
-
-// Scripts and binaries ----------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
+// Scripts and binaries 
+// ------------------------------------------------------------------------------------------------
 iqtree2_gentrius="/Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/scripts/iqtree2_gentrius"
 script_m_py="/Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/scripts/script-gen_0_1_matrix.py"
 script_sanity_check_2_r="/Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/scripts/script-sanity_check_2-analyse_rf_all.r"
 script_topology_summary="/Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/scripts/script-plot-contrees.r"
-// -------------------------------------------------------------------------------------------------------------
-// Simulation parameters
+script_plot_matrix="/Users/Olga/Projects/Science/Projects/terraces/nextflow_gentrius_sim/scripts/script-plot-matrix.r"
+// ------------------------------------------------------------------------------------------------
+// PARAMETERS: SIMULATE DATASET
+// ------------------------------------------------------------------------------------------------
+// ---------------------------------------
+// PARAMS MATRIX: major
+// ---------------------------------------
 taxa=[20]
-genes=[5,10]
-md=[30,50]
-trees_num=2
+genes=[10]
+md=[30]
+// ---------------------------------------
+// PARAMS MATRIX: spread of missing data
+// ---------------------------------------
+r0_all=[1]	//#[0,1] # minimum number of 0 in each row
+c0_all=[10]	//#[1,10,20,50]   # minimum number of 0 in each column
+u_all=[25]	//#[0,5,20]    # % of rows with sum = 1
+
+
+freq=[[1,10,60,30],[2,60,10,30]]		//[[100,0,0],[60,10,30],[10,60,30]]
+probs=[[1,0.05,0.7,0.25],[2,0.1,0.6,0.3]]		//[[1,0,0],[0.1,0.6,0.3],[0.05,0.7,0.25]]
+
+ch_freq=channel.from(freq)
+ch_probs=channel.from(probs)
+ch_freq.cross(ch_probs).into{r_info;c_info}
+
+
+// ---------------------------------------
+// Number of trees per matrix
+// ---------------------------------------
+trees_num=1
+// ------------------------------------------------------------------------------------------------
+// PARAMETERS: POST_ANALYSIS
+// ------------------------------------------------------------------------------------------------
 print_lim=100
 sanity_lim=2
-// -------------------------------------------------------------------------------------------------------------
+p_rm_leaves=0.10
+// ---------------------------------------
+// default stopping rule thresholds
+// ---------------------------------------
+stop_t_default=1000000		// C1: number of generated trees
+stop_i_default=10000000		// C2: number of visited intermediate trees
+// ---------------------------------------
+// increased stopping rule thresholds
+// ---------------------------------------
+stop_t_increased=10000000	// C1: number of generated trees
+stop_i_increased=10000000	// C2: number of visited intermediate trees
+// ------------------------------------------------------------------------------------------------
+// SIMULATE DATASET: RANDOM MATRIX of GENE PRESENCE_ABSENCE
+// ------------------------------------------------------------------------------------------------
 process random_matrix {
+
+	publishDir "$results_path/matrices"
 
 	input:
 	each n from taxa
 	each k from genes
 	each m from md
-	
+
+	each r0 from r0_all
+	each c0 from c0_all
+	each u from u_all
+
+	each r from r_info
+        each c from c_info
+
 	output:
 	//stdout ch
-	file "mrx_${n}_${k}_${m}_sub.*" into matrix
+	file "*sub.*" into matrix
+	file "*_input" into plot_matrix
 
 	script:
+	id="${r[0][0]}${c[0][0]}"
+
+        rf="${r[0][1]} ${r[0][2]} ${r[0][3]}"
+        rp="${r[1][1]} ${r[1][2]} ${r[1][3]}"
+
+        cf="${c[0][1]} ${c[0][2]} ${c[0][3]}"
+        cp="${c[1][1]} ${c[1][2]} ${c[1][3]}"
+	
 	"""
-	file_m="mrx_${n}_${k}_${m}"
-	python3 $script_m_py -n $n -k $k -m $m -o \$file_m
+	file_m="mrx_${n}_${k}_${m}_${r0}_${c0}_${u}_${id}"
+
+	c0_num=\$[$n*$c0/100]
+	u_num=\$[$n*$u/100]
+	python3 $script_m_py -n $n -k $k -m $m -o \$file_m -rf $rf -rp $rp -cf $cf -cp $cp -r0 $r0 -c0 \$c0_num -u \$u_num
 	t="0"
 	while [ \$t -lt ${trees_num} ]
 	do
 		t=\$[\$t+1]
 		cp \${file_m}_input \${file_m}_sub.\$t
 	done
+
 	"""	
 }
-// -------------------------------------------------------------------------------------------------------------
+//ch.view()
+// ------------------------------------------------------------------------------------------------
+// SIMULATE DATASET: RANDOM TREE
+// ------------------------------------------------------------------------------------------------
 process random_tree {
-
 	input:
 	file mrx from matrix.flatten()
 
@@ -62,23 +127,24 @@ process random_tree {
         mv ${tree_file}-mod ${tree_file}
         rm ${tree_file}.log
 	"""
-
 }
 
-
-process gentrius_default_1MLN_10_MLN {
+// ------------------------------------------------------------------------------------------------
+// ANALYSIS: MAIN GENTRIUS
+// ------------------------------------------------------------------------------------------------
+process gentrius {
 
 	input:
 	tuple file(mrx),file(tree) from dataset_m_t
 
 	output:
-	tuple file("$mrx"),file("${tree}"),env(trees_num),env(stop_rule) into results_default
-	file("${mrx}.res_default.log") into results_default_1MLN_10_MLN
+	tuple file("$mrx"),file("${tree}"),env(trees_num),env(stop_rule) into results_gentrius_post
+	file("${mrx}.res_gentrius.log") into results_gentrius_log
 
 	script:
 	"""
-	$iqtree2_gentrius -gentrius -pr_ab_matrix $mrx $tree -pre ${mrx}.res_default
-	file="${mrx}.res_default.log"
+	$iqtree2_gentrius -gentrius -pr_ab_matrix $mrx $tree -pre ${mrx}.res_gentrius
+	file="${mrx}.res_gentrius.log"
 	# ADD set ID to the log file
 	echo "ADDED_INFO_SIMULATION_DATASET_ID: ${mrx.name}" >> \$file
 	# Extract info about stopping rule
@@ -109,10 +175,10 @@ process gentrius_default_1MLN_10_MLN {
 
 
 // ------------------------------------------------------------------------------------------------
-// SPLIT CHANNEL WITH DEFAULT RESULTS FOR DOWNSTREAM ANALYSIS
+// SPLIT CHANNEL WITH GENTRIUS RESULTS FOR DOWNSTREAM ANALYSES
 // ------------------------------------------------------------------------------------------------
 // The resulting channels are exclusive
-results_default
+results_gentrius_post
     .branch { 
 	matrix,tree,tree_num, stop_rule ->
 	x = Integer.valueOf(tree_num)
@@ -132,30 +198,81 @@ results_default
 		return tuple(matrix,tree,x,y)
     } 
     .set { post_default } 
-/*
-post_default.print_trees.view{"$it print"}
-post_default.increase_t.view{"$it increase"}
-post_default.complex_case.view {"$it complex"}
-post_default.others.view {"$it others"}
-*/
+
+
+
+//post_default.print_trees.view{"$it print"}
+//post_default.increase_t.view{"$it increase"}
+//post_default.complex_case.view {"$it complex"}
+//post_default.others.view {"$it others"}
+
 // ------------------------------------------------------------------------------------------------
 
+
+//# Split channel results_default into: with/without stop rule active
+//# Channel stop_rule=0 -> if trees_num in [1,100K] run with print -> in [2,100K] summarise trees
+//#								 -> in [1,5K]	run sanity check
+//# Channel stop_rule=1/2	-> trees_num == 0 -> run complex_analysis
+//#			-> trees_num != 0 -> run with mod thresholds: C1=100MLN C2=100MLN
+//# Channel stop_rule=3 -> nothing, ignore
+
+// ------------------------------------------------------------------------------------------------
+// POST_DEFAULT_ANALYSIS: increase threshold levels for stopping rules
+// ------------------------------------------------------------------------------------------------
+process gentrius_increased_t {
+
+        input:
+        tuple file(mrx),file(tree) from post_default.increase_t
+
+        output:
+        //tuple file("$mrx"),file("${tree}"),env(trees_num),env(stop_rule) into results_gentrius_post_t
+        file("${mrx}.increased_t.res_gentrius.log") into results_gentrius_log_increased_t
+
+        script:
+        """
+        $iqtree2_gentrius -gentrius -pr_ab_matrix $mrx $tree -pre ${mrx}.increased_t.res_gentrius -g_stop_t $stop_t_increased -g_stop_i $stop_i_increased
+        file="${mrx}.increased_t.res_gentrius.log"
+        # ADD set ID to the log file
+        echo "ADDED_INFO_SIMULATION_DATASET_ID: ${mrx.name}" >> \$file
+        # Extract info about stopping rule
+        stop_rule=0
+        check_warning=`grep "stopping condition is active" \$file | wc -l | awk -F " " '{print \$1}'`
+        if [ \$check_warning -eq 1 ]
+        then
+        check_type=`grep "Type of stopping rule: terrace size" \$file | wc -l | awk -F " " '{print \$1}'`
+                if [ \$check_type -eq 1 ]
+                then
+                        stop_rule="1"
+                else
+                        check_type=`cat \$file | grep "Type of stopping rule: number of visited intermediate trees" | wc -l | awk -F " " '{print \$1}'`
+                        if [ \$check_type -eq 1 ]
+                        then
+                                stop_rule="2"
+                        else
+                                stop_rule="3"
+                        fi
+                fi
+        fi
+        # ADD info about stopping rule to log
+        echo "ADDED_INFO_STOP_RULE_ID: \${stop_rule}" >> \$file
+        trees_num=`grep 'Number of trees on terrace' \$file | awk -F " " '{print \$6}'`
+
+        """
+}
+
+
+
 /*
-# Split channel results_default into: with/without stop rule active
-# Channel stop_rule=0 -> if trees_num in [1,100K] run with print -> in [2,100K] summarise trees
-#								 -> in [1,5K]	run sanity check
-# Channel stop_rule=1/2	-> trees_num == 0 -> run complex_analysis
-#			-> trees_num != 0 -> run with mod thresholds: C1=100MLN C2=100MLN
-# Channel stop_rule=3 -> nothing, ignore
-*/
+// ------------------------------------------------------------------------------------------------
+// SUMMARY: RESULTS GENTRIUS
+// ------------------------------------------------------------------------------------------------
 
-
-process summary_default {
+process summary_gentrius_log {
 	
 	publishDir "$results_path/"
 
 	input:
-  	file("*.res_default.log") from results_default_1MLN_10_MLN.collect()
+  	file(log_files) from results_gentrius_log.concat(results_gentrius_log_increased_t,results_complex).collect()
 	
 	output:
 	//stdout ch_1
@@ -167,7 +284,7 @@ process summary_default {
 	then
 		rm \$file_out
 	fi
- 	for file in *.res_default.log
+ 	for file in $log_files
 	do
 		# Extract info from ADDED
 		datasetID=` grep 'ADDED_INFO_SIMULATION_DATASET_ID' \$file | awk -F " " '{print \$2}' `
@@ -192,7 +309,11 @@ process summary_default {
 	done
   	"""
 }
+*/
 
+// ------------------------------------------------------------------------------------------------
+// POST_DEFAULT_ANALYSIS: PRINT OUT GENERATED TREES
+// ------------------------------------------------------------------------------------------------
 process gentrius_print_trees {
 	input:
 	tuple file(mrx),file(tree),val(tree_num) from post_default.print_trees
@@ -207,7 +328,7 @@ process gentrius_print_trees {
 }
 
 // ------------------------------------------------------------------------------
-// Split channel for downstream analysis: sanity and top_summary
+// COPY AND SPLIT channel for downstream analysis: sanity and top_summary
 // ------------------------------------------------------------------------------
 generated_trees.into {ch_sanity; ch_topology}
 
@@ -236,8 +357,9 @@ ch_topology
 	.set{ch_top}
 
 
-// ------------------------------------------------------------------------------
-
+// ------------------------------------------------------------------------------------------------
+// POST_DEFAULT_ANALYSIS: SANITY CHECKs
+// ------------------------------------------------------------------------------------------------
 process sanity_check_1 {
 
 	input:
@@ -294,9 +416,9 @@ process sanity_check_3 {
 }
 
 
-
-//ch_sanity_check_results.mix(ch_sanity_check_results_2).mix(ch_sanity_check_results_3)
-
+// ------------------------------------------------------------------------------------------------
+// SUMMARY: SANITY CHECKs
+// ------------------------------------------------------------------------------------------------
 process sanity_check_results {
 
 	publishDir "$results_path/"
@@ -320,8 +442,9 @@ process sanity_check_results {
 	"""
 
 }
-
-
+// ------------------------------------------------------------------------------------------------
+// SUMMARY: TOPOLOGY
+// ------------------------------------------------------------------------------------------------
 process topological_summary {
 
 	publishDir "$results_path/summary_topology/"
@@ -350,4 +473,126 @@ process topological_summary {
 	Rscript $script_topology_summary ${trees}.contree \$splits_remained \$splits_ignored	
 	"""
 }
+// ------------------------------------------------------------------------------------------------
+// POST_DEFAULT_ANALYSIS: use REMOVE_LEAVES analysis to analyse complex datasets
+// ------------------------------------------------------------------------------------------------
+process analysis_complex_datasets {
+
+	input:
+	tuple file(mrx), file(tree) from post_default.complex_case
+
+	output:
+	file("${mrx}.rm_leaves.res_gentrius.log") into results_complex
+
+	script:
+	"""
+	n=`head -n 1 $mrx | awk -F " " '{print \$1}'`
+	rm_NUM=`echo "\$n*$p_rm_leaves" | bc | awk -F "." '{print \$1}'`
+
+	$iqtree2_gentrius -gentrius -pr_ab_matrix $mrx $tree -pre ${mrx}.rm_leaves.res_gentrius -quiet -g_rm_leaves \$rm_NUM
+
+	file="${mrx}.rm_leaves.res_gentrius.log"
+        # ADD set ID to the log file
+        echo "ADDED_INFO_SIMULATION_DATASET_ID: ${mrx.name}" >> \$file
+        # Extract info about stopping rule
+        stop_rule=0
+        check_warning=`grep "stopping condition is active" \$file | wc -l | awk -F " " '{print \$1}'`
+        if [ \$check_warning -eq 1 ]
+        then
+        check_type=`grep "Type of stopping rule: terrace size" \$file | wc -l | awk -F " " '{print \$1}'`
+                if [ \$check_type -eq 1 ]
+                then
+                        stop_rule="1"
+                else
+                        check_type=`cat \$file | grep "Type of stopping rule: number of visited intermediate trees" | wc -l | awk -F " " '{print \$1}'`
+                        if [ \$check_type -eq 1 ]
+                        then
+                                stop_rule="2"
+                        else
+                                stop_rule="3"
+                        fi
+                fi
+        fi
+        # ADD info about stopping rule to log
+        echo "ADDED_INFO_STOP_RULE_ID: \${stop_rule}" >> \$file
+        trees_num=`grep 'Number of trees on terrace' \$file | awk -F " " '{print \$6}'`
+
+	"""
+
+}
+
+
+if(params.flag_plot){
+
+
+// ------------------------------------------------------------------------------------------------
+// PLOT: MATRIX
+// ------------------------------------------------------------------------------------------------
+process plot_matrix {
+	
+	publishDir "$results_path/plots/matrices"
+
+	input:
+	file (mrx) from plot_matrix
+	
+	output:
+	file ("*.pdf") into plotted_m
+	
+	script:
+	"""
+	Rscript $script_plot_matrix $mrx $mrx
+	"""
+
+}
+
+
+}
+
+// ------------------------------------------------------------------------------------------------
+// SUMMARY: RESULTS GENTRIUS
+// ------------------------------------------------------------------------------------------------
+
+process summary_gentrius_log {
+
+        publishDir "$results_path/"
+
+        input:
+        file(log_files) from results_gentrius_log.concat(results_gentrius_log_increased_t,results_complex).collect()
+
+        output:
+        //stdout ch_1
+        file "results_all_summary_default" into summary_default
+
+        """
+        file_out="results_all_summary_default"
+        if [ -e \$file_out ]
+        then
+                rm \$file_out
+        fi
+        for file in $log_files
+        do
+                # Extract info from ADDED
+                datasetID=` grep 'ADDED_INFO_SIMULATION_DATASET_ID' \$file | awk -F " " '{print \$2}' `
+                datasetID_short=`echo "\$datasetID" | awk -F "_sub" '{print \$1}'`
+                stop_rule=` grep 'ADDED_INFO_STOP_RULE_ID' \$file | awk -F " " '{print \$2}' `
+                # Extract info about input data
+                taxon_num=` grep 'Number of taxa: ' \$file | awk -F " " '{print \$4}' `
+                part_num=` grep 'Number of partitions' \$file | awk -F " " '{print \$4}' `
+                md_percent=`grep 'missing entries in supermatrix' \$file | awk -F " " '{print \$7}'`
+                uniq_taxon_num=` grep 'Number of special taxa' \$file | awk -F " " '{print \$9}' `
+                taxon_num_init_tree=`grep 'Number of taxa on initial tree' \$file | awk -F " " '{print \$7}'`
+                taxon_num_insert=`grep 'Number of taxa to be inserted' \$file | awk -F " " '{print \$7}'`
+
+                # Extract info about results
+                trees_num=`grep 'Number of trees on terrace' \$file | awk -F " " '{print \$6}'`
+                trees_num_interm=`grep 'Number of intermediated trees visited' \$file | awk -F " " '{print \$6}'`
+                dead_ends_num=`grep 'Number of dead ends encountered' \$file | awk -F " " '{print \$6}'`
+                CPU=`grep 'Total CPU' \$file | awk -F " " '{print \$5, \$7}' `
+
+                # Print results summary
+                echo "\${file}__\$datasetID | TAXA \${taxon_num} PART \${part_num} MD \${md_percent} ROW_ZERO 0 COL_ZERO 1 UniqT \${uniq_taxon_num} ID \${datasetID_short} T_SIZE \${trees_num} CPU \${CPU} INT \${trees_num_interm} DEAD \${dead_ends_num} STOP_RULE \${stop_rule} | INIT_TREE \${taxon_num_init_tree} TAXA_TO_INSERT \${taxon_num_insert} MISS_PERCENT \${md_percent} | TERRAPHAST 0 0 0 0" >> \$file_out
+        done
+        """
+}
+
 
